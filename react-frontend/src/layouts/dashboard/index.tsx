@@ -3,8 +3,7 @@ import { Outlet } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
 //
-import Navbar from './Navbar.tsx'
-import { getUser } from 'src/api/user';
+import Navbar from 'Navbar';
 
 // ----------------------------------------------------------------------
 
@@ -38,7 +37,7 @@ export default function DashboardLayout() {
 
   // gets user when dashboard is opened after login :)
   useEffect(() => {
-    getUser(sessionStorage.getItem('user')).then(x => setUser(x))
+    //getUser(sessionStorage.getItem('user')).then(x => setUser(x))
   }, []);
 
   if(!user) {

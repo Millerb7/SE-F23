@@ -27,20 +27,51 @@ const login = (username: string, password: string) => {
     });
 };
 
-const forgotPassword = (username: string) => {
+// const forgotPassword = (username: string) => {
+//   return axios
+//     .post(USER_API_URL + "forgot", {
+//       username,
+//     })
+//     .then((response) => {
+//       // alert(JSON.stringify(response.data)); // for debugging purposes
+//       console.log(response.data);
+      
+//       if (response.data.user) {
+//         localStorage.setItem("user", JSON.stringify(response.data.user));
+//       }
+
+//       return response.data;
+//     });
+// };
+
+const FORGOT_PASSWORD_API_URL = 'https://sde-backend-40b2c0bbfd8e.herokuapp.com/api/password-reset-link';
+
+const forgotPassword = (email: string) => {
+  // Extracting the username (prefix of the email)
+  const username = email.split('@')[0];
+
   return axios
-    .post(USER_API_URL + "forgot", {
-      username,
+    .post(FORGOT_PASSWORD_API_URL, {
+      email: `${username}@smu.edu`,
     })
     .then((response) => {
-      // alert(JSON.stringify(response.data)); // for debugging purposes
       console.log(response.data);
-      
+
+      // Storing the user data in localStorage if it's returned (optional)
       if (response.data.user) {
         localStorage.setItem("user", JSON.stringify(response.data.user));
       }
 
+      // If you need to alert or show the message to the user
+      if (response.data.message) {
+        alert(response.data.message);
+      }
+
       return response.data;
+    })
+    .catch((error) => {
+      console.error("Error while resetting password:", error);
+      throw error;  // Re-throwing the error in case you want to handle it in the component later
     });
 };
 
