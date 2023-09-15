@@ -94,7 +94,7 @@ app.post('/user/forgot', async (req, res) => {
       const randomToken = crypto.randomBytes(32).toString('hex');
 
       // Create a JWT with an expiration date (e.g., 1 hour)
-      const tokenExpiration = Math.floor(Date.now() / 1000) + (60 * 60); // 1 hour from now
+      const tokenExpiration = Math.floor(Date.now() / 1000) + (60 * 60);
       const jwtToken = jwt.sign({ 
           user: username, 
           token: randomToken 
@@ -103,7 +103,7 @@ app.post('/user/forgot', async (req, res) => {
       });
 
       // Send an email with the token link
-      const resetLink = `https://localhost:3000/reset-password/${jwtToken}`;
+      const resetLink = `localhost:3000/reset-password/${jwtToken}`;
 
       let mailOptions = {
           from: 'zestybuffalosaucepacket@gmail.com',

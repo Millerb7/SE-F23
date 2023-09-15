@@ -2,8 +2,7 @@ import { createContext, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
-//
-import Navbar from 'Navbar';
+import Navbar from './Navbar';
 
 // ----------------------------------------------------------------------
 
@@ -32,12 +31,12 @@ const MainStyle = styled('div')(({ theme }) => ({
 export const UserContext = createContext(null);
 
 export default function DashboardLayout() {
-  const [open, setOpen] = useState(false);
   const [ user, setUser ] = useState(undefined);
 
   // gets user when dashboard is opened after login :)
   useEffect(() => {
     //getUser(sessionStorage.getItem('user')).then(x => setUser(x))
+    setUser("weee");
   }, []);
 
   if(!user) {
@@ -49,7 +48,7 @@ export default function DashboardLayout() {
       <RootStyle>
         <Navbar />
         <MainStyle>
-          <Outlet context={{ user }}/>
+          <Outlet />
         </MainStyle>
       </RootStyle>
     </UserContext.Provider>
